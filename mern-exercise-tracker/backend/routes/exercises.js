@@ -30,14 +30,14 @@ router.route("/add").post((req, res) => {
 });
 
 //handles get requests and returns exercise with provided id
-router.route("/id").get((req, res) => {
+router.route("/:id").get((req, res) => {
 	Exercise.findById(req.params.id)
 		.then((exercise) => res.json(exercise))
 		.catch((err) => res.status(400).json("Error: " + err));
 });
 
 //handles delete requests and removes exercise with provided id
-router.route("/id").delete((req, res) => {
+router.route("/:id").delete((req, res) => {
 	Exercise.findByIdAndDelete(req.params.id)
 		.then(() => res.json("Exercise deleted"))
 		.catch((err) => res.status(400).json("Error: " + err));
