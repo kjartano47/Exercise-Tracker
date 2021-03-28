@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 export default class CreateExercise extends Component {
 	constructor(props) {
 		super(props);
@@ -17,6 +19,14 @@ export default class CreateExercise extends Component {
 			date: new Date(),
 			users: [],
 		};
+	}
+
+	//Automatically called right before anything displays on the page
+	componentDidMount() {
+		this.setState({
+			users: ["test user"],
+			username: "test user",
+		});
 	}
 
 	onChangeUsername(e) {
@@ -53,10 +63,70 @@ export default class CreateExercise extends Component {
 			date: this.state.date,
 		};
 		console.log(exercise);
+		console.log("HERE is the Exercise!");
 		//once user submits the form, they will be taken back to the main page
 		window.location = "/";
 	}
 	render() {
-		return <p>You are on the Create Exercise component</p>;
+		return (
+			<div>
+				<h3>Create New Exercise Log</h3>
+				<form onSubmit={this.onSubmit}>
+					<div className="form-group">
+						<label>Username: </label>
+						<select
+							ref="userInput"
+							required
+							className="form-control"
+							value={this.state}
+							onChange={this.onChangeUsername}
+						>
+							{this.state.users.map(function (user) {
+								return (
+									<option key={user} value={user}>
+										{user}
+									</option>
+								);
+							})}
+						</select>
+					</div>
+					<div className="form-group">
+						<label>Description: </label>
+						<input
+							type="text"
+							required
+							className="form-control"
+							value={this.state.description}
+							onChange={this.onChangeDescription}
+						/>
+					</div>
+					<div className="form-group">
+						<label>Duration (in minutes):</label>
+						<input
+							type="text"
+							className="form-control"
+							value={this.state.duration}
+							onChange={this.onChangeDuration}
+						/>
+					</div>
+					<div className="form-group">
+						<label>Date:</label>
+						<div>
+							<DatePicker
+								selected={this.state.date}
+								onChange={this.onChangeDate}
+							/>
+						</div>
+					</div>
+					<div className="form-group">
+						<input
+							type="submit"
+							value="Create Exercise Log"
+							className="btn btn-primary"
+						/>
+					</div>
+				</form>
+			</div>
+		);
 	}
 }
