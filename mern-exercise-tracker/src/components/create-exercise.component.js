@@ -6,7 +6,7 @@ export default class CreateExercise extends Component {
 		super(props);
 
 		//binding this to the methods
-		this.onChangeusername = this.onChangeUsername.bind(this);
+		this.onChangeUsername = this.onChangeUsername.bind(this);
 		this.onChangeDescription = this.onChangeDescription.bind(this);
 		this.onChangeDuration = this.onChangeDuration.bind(this);
 		this.onChangeDate = this.onChangeDate.bind(this);
@@ -63,7 +63,6 @@ export default class CreateExercise extends Component {
 			date: this.state.date,
 		};
 		console.log(exercise);
-		console.log("HERE is the Exercise!");
 		//once user submits the form, they will be taken back to the main page
 		window.location = "/";
 	}
