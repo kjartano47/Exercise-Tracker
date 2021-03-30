@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 export default class CreateUser extends Component {
 	constructor(props) {
 		super(props);
@@ -24,6 +25,11 @@ export default class CreateUser extends Component {
 			username: this.state.username,
 		};
 		console.log(user);
+		//sending to the server endpoint
+		axios
+			.post("http://localhost:5000/users/add", user)
+			.then((res) => console.log(res.data));
+
 		//after submitting, the field will be empty for further submitions of usernames
 		this.setState({
 			username: "",
